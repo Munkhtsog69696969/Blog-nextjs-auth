@@ -13,15 +13,16 @@ const handler=NextAuth({
 
         })
     ],
+    callbackUrl:"http://localhost:3000/api/auth/callback/google",
     callbacks:{
         async session({session}){
             const sessionUser=await User.findOne({
                 providerId:session.user.providerId
             });
     
-            session.user.id=sessionUser._id.toString();
+            // session.user.id=sessionUser._id.toString();
     
-            return session;
+            return sessionUser;
         },
         async signIn({profile}){
             try{
@@ -33,7 +34,7 @@ const handler=NextAuth({
                     await User.create({
                         email:profile.email,
                         username:profile.displayName,
-                        imageUrl:profile.picture,
+                        imageUrl:profile.photos[0].value,
                         providerId:profile.id,
                     });
                 }

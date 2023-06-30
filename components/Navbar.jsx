@@ -18,6 +18,8 @@ const Navbar = () => {
         settingProvider();
     },[]);
 
+    console.log(session)
+
     return (
         <div>
             Navbar
@@ -25,7 +27,7 @@ const Navbar = () => {
                 // provider && Object.values(provider).map((providerItem)=>{
                     (
                         <button
-                            type='button'
+                            // type='button'
                             // key={providerItem.name}
                             onClick={()=>signIn(provider.id)}
                         >
